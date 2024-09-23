@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <script src="./ftoc_converter.js"></script>
+    <script>
+        function nameChange() {
+            document.getElementById("name").innerHTML = "Hello, DOM Manipulation!"
+        }
+    </script>
+    <script>
+        function userinfo(event) {
+            event.preventDefault()
+            var uName = document.getElementById("username").value
+            var uAge = document.getElementById("userage").value
+            document.getElementById("infodisplay").innerHTML = "Hello, " + uName + " You are " + uAge + " years old!"
+        }
+    </script>
+</head>
+
+<body>
+
+    <!-- DOM manipulation part -->
+    <p id="name"> My name is Adnan</p>
+    <button onclick="nameChange()">Click Me!</button>
+
+    <form onsubmit="userinfo(event)" >
+        <label>Username:</label>
+        <input type="text" id="username" required>
+        <label>Age:</label>
+        <input type="number" id="userage" required>
+        <input type="submit" value="Click me!">
+    </form>
+    <p id="infodisplay"></p>
+
+     <!-- to show varibale type -->
+    <p id="variable-display"></p>
+
+     <!-- display string comparison -->
+    <p id="string-compare"></p>
+
+    <!-- operators working output -->
+    <p id="operators-show"></p>
+
+     <!-- Temperature conversion output -->
+    <h1>Temperature Converter</h1>
+    <button onclick="cToF(25)">Convert C to F</button>
+    <button onclick="fToC(98)">Convert F to C</button>
+    <p id="conversion-value"></p>
+
+     <!-- script to display varibale info -->
+    <script>
+        let myString = "Hello"
+        let myNum = 25
+        let myBoolean = true
+        let myNull = null
+        let myUndef
+        let myBigInt = 423423589257384683487n
+
+        function displayVariable(varName, varType, value) {
+            document.getElementById("variable-display").innerHTML += "type of " + varName + " variable is " + varType + " and value is " + value + " <br>";
+        }
+
+        displayVariable("myString", typeof myString, myString)
+        displayVariable("myNumber", typeof myNum, myNum)
+        displayVariable("myBoolean", typeof myBoolean, myBoolean)
+        displayVariable("myNull", typeof myNull, myNull)
+        displayVariable("myUndef", typeof myUndef, myUndef)
+        displayVariable("myBigint", typeof myBigInt, myBigInt)
+    </script>
+
+     <!-- script to compare two strings -->
+    <script>
+
+        function stringComparison(str1, str2) {
+            if (str1 === str2) {
+                document.getElementById('string-compare').innerHTML += str1 + " is equal to " + str2 + " <br>";
+            } else if (str1 > str2) {
+                document.getElementById('string-compare').innerHTML += str1 + " is lexicographically greater than " + str2 + " <br>";
+            } else if (str1 < str2) {
+                document.getElementById('string-compare').innerHTML += str1 + " is lexicographically less than " + str2 + " <br>";
+            }
+
+        }
+
+        // Basic Strings
+        stringComparison("apple", "orange");   // orange is greater than apple lexicographically, since 'o' is larger than 'a'
+        stringComparison("dog", "dog");        // these both are equal strings
+        stringComparison("banana", "Banana");  // 'b' has a bigger value than 'B' lexicographically
+
+        // Empty Strings
+        stringComparison("", "hello");         // non empty string will always be greater than empty string
+        stringComparison("", "");              // any two empty strings will be equal
+
+        // Special Characters
+        stringComparison("@home", "@work");    // since @ symbol is in both string, we look for next character. 'w' is greater than 'h', so @work is greater than @home lexicographically
+        stringComparison("hello!", "hello");   // since ! comes after hello, then according to ASCII values, 'hello!' is greater than 'hello'
+        stringComparison("good$", "good");     // again since '$' comes after 'good'. "good$" is greater than "good" lexicographically
+
+        // Numbers as Strings
+        stringComparison("123", "124");        //  so first two char are same and since 3 is less than 4, "123" is less that "124" lexicographically if we look at the third digits.
+        stringComparison("99", "100");         //  we look at the first digit, since 9 is greater than 1. "99" is greater than "100" lexicographically
+
+        // Whitespace in Strings
+        stringComparison(" space", "space");   // not 100% sure but "space" is greater than " space" due to whitespace before.
+        stringComparison("space ", "space");   // "space " is greater than "space" lexicographically since there is whitespace after 
+        stringComparison("hello ", "hello");   // same as above, whitespace after 'hello' makes "hello " greater than "hello" lexicographically
+
+        // Mixed Case Comparisons
+        stringComparison("JavaScript", "javascript"); // lowercase letters have higher values lexicographically, which makes "javascript" greater than "JavaScript"
+        stringComparison("Hello", "HELLO");           // since first letters are same, we evaluate the following ones. As we know lowercase has greater value, then "Hello" is greater than "HELLO" lexicographically
+
+        // Punctuation and Symbols
+        stringComparison("hello.", "hello!");         // ! comes after . so we can confirm here that "hello!" is greater than "hello."
+        stringComparison("test123", "test_123");     // "test_123" is greater than "test123" lexicographically
+    </script>
+
+ <!-- script to dsiplay combine operator working -->
+    <script>
+
+        var x = 100
+
+        function operatorShow(op, value) {
+            document.getElementById("operators-show").innerHTML += "The value of x using " + op + " operator is " + value + " <br>"
+        }
+
+        x += 50
+        operatorShow("+=", x)
+
+        x -= 30
+        operatorShow("-=", x)
+
+        x *= 2
+        operatorShow("*=", x)
+
+        x /= 5
+        operatorShow("/=", x)
+
+        x %= 7
+        operatorShow("%=", x)
+    </script>
+
+ <!-- script of celsius to fahrenheit conversion -->
+    <script>
+        // Function to convert Celsius to Fahrenheit
+        function cToF(celsius) {
+            var fVal = (celsius * 9 / 5) + 32;
+            document.getElementById('conversion-value').innerHTML = celsius + "°C is equal to " + fVal + "°F";
+        }
+
+    </script>
+
+</body>
+
+</html>
